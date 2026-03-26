@@ -1,25 +1,37 @@
 [package]
 name = "heltec-d20-firmware"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
+publish = false
+
+[[bin]]
+name = "heltec-d20-firmware"
+harness = false
 
 [dependencies]
-esp-hal = { version = "1", features = ["esp32s3"] }
-esp-alloc = "0.7"
-esp-backtrace = { version = "0.15", features = ["esp32s3", "panic-handler", "println"] }
-esp-println = { version = "0.13", features = ["esp32s3", "log"] }
+# ESP32-S3 HAL + support
+esp-hal = { version = "~1.0", features = ["esp32s3", "log-04", "unstable"] }
+esp-bootloader-esp-idf = { version = "0.4.0", features = ["esp32s3", "log-04"] }
+esp-alloc = "0.9.0"
+esp-println = { version = "0.16.1", features = ["esp32s3", "log-04"] }
 log = "0.4"
 
-# Display — direct embedded-graphics (no ratatui on firmware)
+# Display
 ssd1306 = "0.9"
 embedded-graphics = "0.8"
 
-# Shared dice logic only (no UI — we render with embedded-graphics directly)
-heltec-d20-shared = { path = "../shared", default-features = false }
+# Ratatui + mousefood (no_std compatible with these flags!)
+ratatui = { version = "0.30.0", default-features = false, features = ["all-widgets"] }
+mousefood = "0.4"
+
+# Shared dice logic + TUI rendering
+heltec-d20-shared = { path = "../shared", default-features = false, features = ["tui"] }
 
 [profile.dev]
-opt-level = "s"
+debug = true
+opt-level = 3
 
 [profile.release]
+codegen-units = 1
 opt-level = "s"
-lto = true
+lto = "fat"
