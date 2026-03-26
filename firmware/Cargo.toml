@@ -1,0 +1,29 @@
+[package]
+name = "heltec-d20-firmware"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+esp-hal = { version = "1", features = ["esp32s3"] }
+esp-alloc = "0.7"
+esp-backtrace = { version = "0.15", features = ["esp32s3", "panic-handler", "println"] }
+esp-println = { version = "0.13", features = ["esp32s3", "log"] }
+log = "0.4"
+
+# Display
+ssd1306 = "0.9"
+embedded-graphics = "0.8"
+
+# Ratatui + mousefood (embedded backend)
+ratatui = { version = "0.29", default-features = false }
+mousefood = { version = "0.4", default-features = false }
+
+# Shared dice logic
+heltec-d20-shared = { path = "../shared", default-features = false }
+
+[profile.dev]
+opt-level = "s"        # Optimize for size even in dev (ESP32 flash is limited)
+
+[profile.release]
+opt-level = "s"
+lto = true
