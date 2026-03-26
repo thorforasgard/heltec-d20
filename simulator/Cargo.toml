@@ -1,0 +1,15 @@
+[package]
+name = "heltec-d20-simulator"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "heltec-d20-sim"
+path = "src/main.rs"
+
+[dependencies]
+heltec-d20-shared = { path = "../shared" }
+ratatui = "0.29"
+crossterm = "0.28"
+rand = "0.9"
+anyhow = "1"
