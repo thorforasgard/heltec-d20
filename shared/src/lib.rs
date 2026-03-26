@@ -4,6 +4,7 @@ pub mod dice;
 pub mod ui;
 pub mod animation;
 pub mod history;
+pub mod sprites;
 
 use dice::DieType;
 use animation::AnimationState;
