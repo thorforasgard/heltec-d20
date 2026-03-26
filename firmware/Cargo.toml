@@ -10,19 +10,15 @@ esp-backtrace = { version = "0.15", features = ["esp32s3", "panic-handler", "pri
 esp-println = { version = "0.13", features = ["esp32s3", "log"] }
 log = "0.4"
 
-# Display
+# Display — direct embedded-graphics (no ratatui on firmware)
 ssd1306 = "0.9"
 embedded-graphics = "0.8"
 
-# Ratatui + mousefood (embedded backend)
-ratatui = { version = "0.29", default-features = false }
-mousefood = { version = "0.4", default-features = false }
-
-# Shared dice logic
+# Shared dice logic only (no UI — we render with embedded-graphics directly)
 heltec-d20-shared = { path = "../shared", default-features = false }
 
 [profile.dev]
-opt-level = "s"        # Optimize for size even in dev (ESP32 flash is limited)
+opt-level = "s"
 
 [profile.release]
 opt-level = "s"

@@ -1,10 +1,12 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 
 pub mod dice;
-pub mod ui;
 pub mod animation;
 pub mod history;
 pub mod sprites;
+
+#[cfg(feature = "tui")]
+pub mod ui;
 
 use dice::DieType;
 use animation::AnimationState;
