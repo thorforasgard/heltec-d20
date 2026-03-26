@@ -18,9 +18,6 @@ use esp_hal::main;
 use esp_hal::rng::Rng;
 use esp_hal::time::Rate;
 
-use embedded_graphics::pixelcolor::BinaryColor;
-use embedded_graphics::prelude::*;
-use ssd1306::mode::BufferedGraphicsMode;
 use ssd1306::prelude::*;
 use ssd1306::rotation::DisplayRotation;
 use ssd1306::size::DisplaySize128x64;
@@ -102,7 +99,7 @@ fn main() -> ! {
     );
 
     // ----- Hardware RNG -----
-    let rng = Rng::new(peripherals.RNG);
+    let rng = Rng::new();
     let mut hw_rng = HardwareRng(rng);
 
     // ----- Mousefood + Ratatui Terminal -----
