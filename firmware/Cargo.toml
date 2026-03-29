@@ -34,4 +34,4 @@ opt-level = 3
 [profile.release]
 codegen-units = 1
 opt-level = "s"
-lto = "fat"
+# lto = "fat" — REMOVED: fat LTO merges .rodata_desc into .rodata, espflash can't find app descriptor
